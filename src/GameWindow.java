@@ -7,7 +7,7 @@ public class GameWindow {
     static final int DIMENSION = 25;
 
     private Graphics g;
-    private JFrame mainFrame;
+    private  JFrame mainFrame;
     private Fruit fruit;
     public GameWindow() {
         mainFrame = new JFrame();
@@ -16,9 +16,14 @@ public class GameWindow {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(SCREEN_WIDTH*DIMENSION, SCREEN_HEIGHT*DIMENSION);
         mainFrame.setLocationRelativeTo(null);
+        mainFrame.setResizable(false);
         mainFrame.setVisible(true);
         mainFrame.getContentPane().setBackground(Color.BLACK);
-    }
 
+        GameStart();
+    }
+    public void GameStart(){
+        
+    }
 
 }
