@@ -18,13 +18,13 @@ public class Fruit {
         x = -1;
         y = -1;
     }
-    public void generate () {
-        x = random.nextInt(GameWindow.SCREEN_WIDTH * GameWindow.DIMENSION);
-        y = random.nextInt(GameWindow.SCREEN_HEIGHT * GameWindow.DIMENSION);
+    public void generateNewFruit () {
+        x = random.nextInt(MainWindow.SCREEN_WIDTH * MainWindow.DIMENSION);
+        y = random.nextInt(MainWindow.SCREEN_HEIGHT * MainWindow.DIMENSION);
     }
 
-    public void DrawFruit(Graphics g) {
+    public void RenderFruit(Graphics2D g) {
         g.setColor(Color.RED);
-        g.fillOval(x, y, GameWindow.DIMENSION, GameWindow.DIMENSION);
+        g.fillOval(x, y, MainWindow.DIMENSION, MainWindow.DIMENSION);
     }
 }
