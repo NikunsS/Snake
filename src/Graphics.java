@@ -10,7 +10,7 @@ public class Graphics extends JPanel implements ActionListener{
     private Fruit fruit;
     private MainWindow game;
     String state;
-    private Timer t = new Timer(100, this);
+    private Timer t = new Timer(75, this);
 
     public Graphics(MainWindow g) {
         t.start();
@@ -31,6 +31,13 @@ public class Graphics extends JPanel implements ActionListener{
 
         g2D.setColor(Color.black);
         g2D.fillRect(0, 0, MainWindow.SCREEN_WIDTH * MainWindow.DIMENSION + 5, MainWindow.SCREEN_HEIGHT * MainWindow.DIMENSION + 5);
+
+        if(state == "START") {
+            JButton startButton = new JButton("Start");
+            startButton.add(startButton);
+            startButton.setBounds((MainWindow.SCREEN_HEIGHT*MainWindow.DIMENSION-100)/2,(MainWindow.SCREEN_HEIGHT*MainWindow.DIMENSION-200)/2,100,200);
+            startButton.addActionListener(e -> state = "RUNNING");
+        }
 
         if(state == "RUNNING") {
             g2D.setColor(Color.red);

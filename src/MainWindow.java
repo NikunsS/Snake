@@ -5,9 +5,9 @@ import java.util.Objects;
 import javax.swing.*;
 public class MainWindow implements KeyListener {
 
-    static final int SCREEN_WIDTH = 50;
-    static final int SCREEN_HEIGHT = 50;
-    static final int DIMENSION = 15;
+    static final int SCREEN_WIDTH = 20;
+    static final int SCREEN_HEIGHT = 20;
+    static final int DIMENSION = 30;
 
     private Graphics g;
     private  JFrame mainFrame;
@@ -38,17 +38,14 @@ public class MainWindow implements KeyListener {
         mainFrame.add(graphics);
 
         Thread.sleep(100);
-          startButton = new JButton("Start");
-//        startButton.setBounds((SCREEN_HEIGHT*DIMENSION-100)/2,(SCREEN_HEIGHT*DIMENSION-200)/2,100,200);
-          startButton.addActionListener(e -> GameStart());
-        mainFrame.add(startButton);
+
 
         
     }
 
 
     private void GameStart() {
-        startButton.setVisible(false);
+
         graphics.state = "RUNNING";
         }
 
