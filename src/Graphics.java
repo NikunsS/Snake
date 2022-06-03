@@ -13,8 +13,7 @@ public class Graphics extends JPanel implements ActionListener{
     private Timer t = new Timer(100, this);
 
     public Graphics(MainWindow g) {
-       // t.start();
-        state = "START";
+        t.start();
 
         game = g;
         snake = g.getSnake();
@@ -30,14 +29,21 @@ public class Graphics extends JPanel implements ActionListener{
 
         Graphics2D g2D = (Graphics2D) g;
 
+        g2D.setColor(Color.black);
+        g2D.fillRect(0, 0, MainWindow.SCREEN_WIDTH * MainWindow.DIMENSION + 5, MainWindow.SCREEN_HEIGHT * MainWindow.DIMENSION + 5);
+
         if(state == "RUNNING") {
             g2D.setColor(Color.red);
-            g2D.fillRect(fruit.getX() * MainWindow.DIMENSION, fruit.getY() * MainWindow.DIMENSION, MainWindow.DIMENSION, MainWindow.DIMENSION);
+            g2D.fillOval(fruit.getX() * MainWindow.DIMENSION, fruit.getY() * MainWindow.DIMENSION, MainWindow.DIMENSION, MainWindow.DIMENSION);
 
             g2D.setColor(Color.green);
             for (Rectangle r : snake.getBody()) {
                 g2D.fill(r);
             }
+        }
+        if(state == "END") {
+            g2D.setColor(Color.WHITE);
+            g2D.drawString("Score: " + (snake.getBody().size() - 3), MainWindow.SCREEN_WIDTH/2 * MainWindow.DIMENSION - 40, MainWindow.SCREEN_HEIGHT / 2 * MainWindow.DIMENSION - 20);
         }
     }
     public void actionPerformed(ActionEvent e) {

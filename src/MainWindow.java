@@ -1,12 +1,13 @@
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Objects;
 import javax.swing.*;
 public class MainWindow implements KeyListener {
 
-    static final int SCREEN_WIDTH = 30;
-    static final int SCREEN_HEIGHT = 30;
-    static final int DIMENSION = 30;
+    static final int SCREEN_WIDTH = 50;
+    static final int SCREEN_HEIGHT = 50;
+    static final int DIMENSION = 15;
 
     private Graphics g;
     private  JFrame mainFrame;
@@ -15,28 +16,33 @@ public class MainWindow implements KeyListener {
     private Snake snake;
     private Graphics graphics;
 
-    public MainWindow() {
+    public MainWindow() throws InterruptedException {
         mainFrame = new JFrame();
+        snake = new Snake();
+        fruit = new Fruit();
+//        graphics = new Graphics(this);
         WindowInit(mainFrame);
     }
 
 
 
-    public void WindowInit(JFrame mainFrame){
+    public void WindowInit(JFrame mainFrame) throws InterruptedException {
         mainFrame.setTitle("Snake");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setSize(SCREEN_WIDTH*DIMENSION, SCREEN_HEIGHT*DIMENSION);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setResizable(false);
         mainFrame.setVisible(true);
-        mainFrame.getContentPane().setBackground(Color.BLACK);
         graphics = new Graphics(this);
+        mainFrame.getContentPane().setBackground(Color.BLACK);
         mainFrame.add(graphics);
 
-        startButton = new JButton("Start");
-        startButton.setBounds((SCREEN_HEIGHT*DIMENSION-100)/2,(SCREEN_HEIGHT*DIMENSION-200)/2,100,200);
-        startButton.addActionListener(e -> GameStart());
+        Thread.sleep(100);
+          startButton = new JButton("Start");
+//        startButton.setBounds((SCREEN_HEIGHT*DIMENSION-100)/2,(SCREEN_HEIGHT*DIMENSION-200)/2,100,200);
+          startButton.addActionListener(e -> GameStart());
         mainFrame.add(startButton);
+
         
     }
 
@@ -48,7 +54,7 @@ public class MainWindow implements KeyListener {
 
 
     public void update() {
-        if(graphics.state == "RUNNING") {
+        if(Objects.equals(graphics.state, "RUNNING")) {
             if(FruitCollisionCheck()) {
                 snake.grow();
                 fruit.generateNewFruit();
@@ -98,7 +104,28 @@ public class MainWindow implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
+        int keyCode = e.getKeyCode();
 
+        if(graphics.state == "RUNNING") {
+            if(keyCode == KeyEvent.VK_UP && snake.getMove() != "DOWN") {
+                snake.up();
+            }
+
+            if(keyCode == KeyEvent.VK_DOWN && snake.getMove() != "UP") {
+                snake.down();
+            }
+
+            if(keyCode == KeyEvent.VK_LEFT && snake.getMove() != "RIGHT") {
+                snake.left();
+            }
+
+            if(keyCode == KeyEvent.VK_RIGHT && snake.getMove() != "LEFT") {
+                snake.right();
+            }
+        }
+        else {
+            this.GameStart();
+        }
     }
 
     @Override

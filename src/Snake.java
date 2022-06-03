@@ -76,9 +76,25 @@ public class Snake {
         }
 
         body.add(0, temp);
+        body.remove(body.size()-1);
     }
 
     public void grow(){
+        Rectangle head = body.get(0);
+        Rectangle temp = new Rectangle(MainWindow.DIMENSION,MainWindow.DIMENSION);
+        if(move == "UP"){
+            temp.setLocation(head.x, head.y - MainWindow.DIMENSION);
+        }
+        else if(move == "DOWN") {
+            temp.setLocation(head.x, head.y + MainWindow.DIMENSION);
+        }
+        else if(move == "LEFT") {
+            temp.setLocation(head.x - MainWindow.DIMENSION, head.y);
+        }
+        else{
+            temp.setLocation(head.x + MainWindow.DIMENSION, head.y);
+        }
+        body.add(0, temp);
 
     }
 
